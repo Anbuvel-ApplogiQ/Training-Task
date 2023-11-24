@@ -25,6 +25,8 @@ const Inputcomponent = ({
   selectdropdown,
   dropdown,
   lefticon,
+  secureTextEntry
+ 
 }) => {
   const[IsFocused,setIsFocused]=useState(false);
   const [isvalue, setisValue] = useState('');
@@ -56,12 +58,16 @@ const Inputcomponent = ({
             placeholder={textinputplaceholder}
             keyboardType={keyboardtype}
             onChangeText={onChangetext}
+            secureTextEntry={secureTextEntry}
             value={value}
             onFocus={() => {
               onFocus();
               setIsFocused(true);
             }}
             onBlur={() => setIsFocused(false)}
+            
+            
+            
           />
         </View>
          {error && (
@@ -95,7 +101,7 @@ const Inputcomponent = ({
           //     // setCountryCode(phoneInput.current?.getCountryCode() || '');
           //   }}
           countryPickerProps={{withAlphaFilter: true}}
-          containerStyle={{width: wp('90%'), borderRadius: 16,borderWidth:1,borderColor:error?"red":"white"}}
+          containerStyle={{width: wp('87.4%'), borderRadius: 16,borderWidth:1,borderColor:error?"red":"white"}}
           textContainerStyle={{
             borderRadius: 16,
             backgroundColor: 'white',
@@ -160,7 +166,7 @@ const Inputcomponent = ({
           setOpen={setOpen}
           setItems={setItems}
           placeholder={'Select your gender'}
-          dropDownContainerStyle={{
+          dropDownContainerStyle={{ 
             borderWidth: 2,
             borderColor: '#fff',
           }}
@@ -189,7 +195,7 @@ const Inputcomponent = ({
 
 const style = StyleSheet.create({
   container: {
-    width: wp('90%'),
+    width: wp('87.4%'),
     marginBottom: 8,
   },
   errorinputtextcontainer:{

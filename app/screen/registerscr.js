@@ -23,7 +23,8 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-const Registerscr = () => {
+const Registerscr = ({navigation}) => {
+  // console.log(navigation, '1111111');
   const Defaultime = require('../image/ProfileAvatar.png');
   // -----------------------------------------------use state start
   const [imageSource, setImageSource] = useState('');
@@ -89,26 +90,28 @@ const Registerscr = () => {
   };
   // ------------------------------validate func--
   const Validate = () => {
-
     if (!input.Username) {
       handleError('Username Requierd', 'Username');
-    } else if(!input.Username.match( /^[a-zA-Z0-9_]{4,}$/))
-    {
+    } else if (!input.Username.match(/^[a-zA-Z0-9_]{4,}$/)) {
       handleError('Enter Valid Username', 'Username');
     }
 
     if (!input.firstname) {
       handleError('Firstname Required', 'firstname');
-    }else if(!input.firstname.match(/^[a-zA-Z]+$/))
-    {
-       handleError(' FirstName should be Alphabetic characters only','firstname')
+    } else if (!input.firstname.match(/^[a-zA-Z]+$/)) {
+      handleError(
+        ' FirstName should be Alphabetic characters only',
+        'firstname',
+      );
     }
 
     if (!input.lastname) {
       handleError('Lastname Required', 'lastname');
-    }else if(!input.lastname.match(/^[a-zA-Z]+$/))
-    {
-       handleError(' FirstName should be Alphabetic characters only','lastname')
+    } else if (!input.lastname.match(/^[a-zA-Z]+$/)) {
+      handleError(
+        ' FirstName should be Alphabetic characters only',
+        'lastname',
+      );
     }
 
     if (!input.email) {
@@ -123,10 +126,8 @@ const Registerscr = () => {
 
     if (!input.mobile) {
       handleError('Mobile Number Required', 'mobile');
-    }
-    else if(!input.mobile.match( /^\d{10}$/))
-    {
-      handleError(' Enter a Valid 10-digit Mobile NUmber','mobile');
+    } else if (!input.mobile.match(/^\d{10}$/)) {
+      handleError(' Enter a Valid 10-digit Mobile NUmber', 'mobile');
     }
   };
 
@@ -137,7 +138,7 @@ const Registerscr = () => {
       ...prev,
       [key]: text,
     }));
-    console.log(typeof text);
+    // console.log(typeof text);
   };
 
   const handleError = (error, key) => {
@@ -145,6 +146,15 @@ const Registerscr = () => {
       ...prev,
       [key]: error,
     }));
+  };
+  // =====================navigation
+
+  const handleSave = () => {
+    Validate();
+  
+    if (Object.keys(errors).length === 0) {
+      navigation.navigate('Createpasswordscr', { input, ...prop });
+    }
   };
   // ------------------------print func-----
 
@@ -224,7 +234,7 @@ const Registerscr = () => {
                 height={180}
                 customStyles={{
                   wrapper: {
-                    backgroundColor:"tarnsparent",
+                    backgroundColor: 'tarnsparent',
                   },
                   draggableIcon: {
                     backgroundColor: 'rgba(126, 0, 149, 1)',
@@ -338,7 +348,6 @@ const Registerscr = () => {
             value={input.sex}
             dropdown
             onChangetext={val => {
-           
               handlechange(val.value, 'sex');
               handleError(null, 'sex');
             }}
@@ -380,14 +389,27 @@ const Registerscr = () => {
             error={errors.mobile}
           />
 
-          {/* <Button onPress={submit }/> */}
-          <Pressable
+          
+          {/* <Pressable
             // onPress={() => setModalVisible(true)}
-            onPress={() => Validate()}
+            // onPress={() => Validate()}
+            onPress={navigation.navigate('Createpasswordscr', { input: input })}
+
             style={style.btncontainer}>
             <Text style={[style.btn, {color: '#fff'}]}>Save</Text>
-          </Pressable>
+          </Pressable> */}
         </View>
+        <Pressable
+        // onPress={() => {
+        //   Validate(); 
+        //   if (Object.keys(errors).length === 0) {
+        //     navigation.navigate('Createpasswordscr', { input: input, ...prop });
+        //   }
+        // }}
+        onPress={handleSave}
+         style={style.btncontainer}>
+          <Text style={[style.btn, {color: '#fff'}]}>Save</Text>
+        </Pressable>
       </View>
     </ScrollView>
   );
@@ -451,7 +473,7 @@ const style = StyleSheet.create({
     // width: '100%',
     // height: 48,
     height: hp('6.7%'),
-    width: wp('90%'),
+    width: wp('87.4%'),
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 16,

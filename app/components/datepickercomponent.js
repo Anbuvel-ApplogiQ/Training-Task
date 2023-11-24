@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         // width:"80%",
         // height:56,
         height: hp('8%'),
-        width: wp('90%'),
+        width: wp('87.4%'),
         // backgroundColor:"blue",
 
         marginTop:-25
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     inputcontainer:{
         // width:"40%",
-        width: wp('28.7%'),
+        width: wp('27.7%'),
         
         backgroundColor:"white",
         marginRight:8,
