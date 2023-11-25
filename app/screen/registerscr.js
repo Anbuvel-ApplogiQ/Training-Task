@@ -14,7 +14,6 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import Inputcomponent from '../components/inputcomponent';
 import Camera from '../image/Icon.svg/';
 import Delete from '../image/trash.svg';
-// import Deletephoto from '../image/delete-user.svg';
 import Select from '../image/picture.svg';
 import Edit from '../image/user-pen (1).svg';
 import Datepicker from '../components/datepickercomponent';
@@ -24,7 +23,6 @@ import {
 } from 'react-native-responsive-screen';
 
 const Registerscr = ({navigation}) => {
-  // console.log(navigation, '1111111');
   const Defaultime = require('../image/ProfileAvatar.png');
   // -----------------------------------------------use state start
   const [imageSource, setImageSource] = useState('');
@@ -88,49 +86,50 @@ const Registerscr = ({navigation}) => {
       // console.log(image);
     });
   };
-  // ------------------------------validate func--
-  const Validate = () => {
-    if (!input.Username) {
-      handleError('Username Requierd', 'Username');
-    } else if (!input.Username.match(/^[a-zA-Z0-9_]{4,}$/)) {
-      handleError('Enter Valid Username', 'Username');
-    }
+  // ===========================validate fun
 
+  const validate = () => {
+    let error = {};
+    if (!input.Username) {
+      error.Username = 'Username is required.';
+    } else if (!input.Username.match(/^[a-zA-Z0-9_]{4,}$/)) {
+      error.Username = 'Enter Valid Username';
+    }
     if (!input.firstname) {
-      handleError('Firstname Required', 'firstname');
+      error.firstname = 'Firstname Required.';
     } else if (!input.firstname.match(/^[a-zA-Z]+$/)) {
-      handleError(
-        ' FirstName should be Alphabetic characters only',
-        'firstname',
-      );
+      error.firstname = ' FirstName should be Alphabetic characters only.';
     }
 
     if (!input.lastname) {
-      handleError('Lastname Required', 'lastname');
+      error.lastname = 'Lastname Required.';
     } else if (!input.lastname.match(/^[a-zA-Z]+$/)) {
-      handleError(
-        ' FirstName should be Alphabetic characters only',
-        'lastname',
-      );
+      error.lastname = ' FirstName should be Alphabetic characters only.';
     }
 
     if (!input.email) {
-      handleError('Email Required', 'email');
+      error.email = 'Email Required.';
     } else if (!input.email.match(/\S+@\S+\.\S+/)) {
-      handleError('Enter Valid Email', 'email');
+      error.email = 'Enter Valid Email.';
     }
 
     if (!input.sex) {
-      handleError('Select any One', 'sex');
+      error.sex = ' Select any One.';
     }
 
     if (!input.mobile) {
-      handleError('Mobile Number Required', 'mobile');
+      error.mobile = 'Mobile Number Required.';
     } else if (!input.mobile.match(/^\d{10}$/)) {
-      handleError(' Enter a Valid 10-digit Mobile NUmber', 'mobile');
+      error.mobile = ' Enter a Valid 10-digit Mobile NUmber.';
+    }
+    seterrors(error);
+
+    if (Object.values(error).length === 0) {
+      navigation.navigate('Createpasswordscr', {input: input});
+    } else {
+      console.log('fail', error);
     }
   };
-
   // ------------------------------handchange func
 
   const handlechange = (text, key) => {
@@ -138,7 +137,7 @@ const Registerscr = ({navigation}) => {
       ...prev,
       [key]: text,
     }));
-    // console.log(typeof text);
+   
   };
 
   const handleError = (error, key) => {
@@ -147,31 +146,7 @@ const Registerscr = ({navigation}) => {
       [key]: error,
     }));
   };
-  // =====================navigation
-
-  const handleSave = () => {
-    Validate();
-  
-    if (Object.keys(errors).length === 0) {
-      navigation.navigate('Createpasswordscr', { input, ...prop });
-    }
-  };
-  // ------------------------print func-----
-
-  // return(
-
-  //   <Modal>
-  //     <View>
-  //       <Text>anbu</Text>
-  //     </View>
-  //   </Modal>
-  // //   console.log(input?.Username, 'INPUT VALUES-(username)');
-  // // console.log(input?.firstname, 'INPUT VALUES-(firstname)');
-  // // console.log(input?.lastname, 'INPUT VALUES-(lastname)');
-  // // console.log(input?.sex, 'INPUT VALUES-(sex)');
-  // // console.log(input?.email, 'INPUT VALUES-(email)');
-  // // console.log(input?.mobile, 'INPUT VALUES-(mobile)');
-  // )
+// ==============================================
 
   return (
     <ScrollView>
@@ -198,7 +173,7 @@ const Registerscr = ({navigation}) => {
                     lastname: {input?.lastname}
                   </Text>
                   <Text style={style.modeltext}>sex: {input?.sex}</Text>
-                  {/* <Text style={style.modeltext}>Dob: {input?.dob}</Text> */}
+                 
                   <Text style={style.modeltext}>Email: {input?.email}</Text>
                   <Text style={style.modeltext}>Mobile: {input?.mobile}</Text>
                 </View>
@@ -213,7 +188,7 @@ const Registerscr = ({navigation}) => {
           </Modal>
 
           <View style={style.photocontainer}>
-            {/* <Image source={imageSource ? imageSource : Defaultimg} style={style.photo} /> */}
+           
             <Pressable style={style.imagecontainer}>
               <Image
                 source={imageSource ? {uri: imageSource} : Defaultime}
@@ -260,35 +235,13 @@ const Registerscr = ({navigation}) => {
                       <Text style={style.btnshttext}>Camera</Text>
                     </Pressable>
                   </View>
-                  {/* 
-                  <View style={style.btmsheetcontainer}>
-                    <Pressable onPress={() => setImageSource('')}>
-                      <View style={style.butshticon}>
-                        <Deletephoto height={50} width={50} />
-                      </View>
+                  
 
-                      <Text style={style.btnshttext}>Delete</Text>
-                    </Pressable>
-                  </View> */}
-
-                  {/* <View style={style.btmsheetcontainer}>
-                    <Pressable onPress={() => setImageSource('')}>
-                      <View style={style.butshticon}>
-                      <Camera height={50} width={50} />
-                      </View>
-
-                      <Text style={style.btnshttext}>Delete</Text>
-                    </Pressable>
-                  </View> */}
+                  
                 </View>
               </RBSheet>
 
-              {/* <Pressable style={style.svgbackground} onPress={upload}>
-              <Deletephoto height={15} width={15} />
-              </Pressable> */}
-              {/* <Pressable style={style.svgbackground} onPress={upload}>
-              <Deletephoto height={15} width={15} />
-              </Pressable> */}
+             
               <View
                 style={{
                   flexDirection: 'row',
@@ -322,7 +275,7 @@ const Registerscr = ({navigation}) => {
             textinputplaceholder={' @mr.miyagi'}
             onChangetext={text => handlechange(text, 'Username')}
             onFocus={() => handleError(null, 'Username')}
-            // keyboardtype={'default'}
+            
             error={errors.Username}
           />
           <Inputcomponent
@@ -357,11 +310,7 @@ const Registerscr = ({navigation}) => {
           <Inputcomponent label={'Date of birth'} />
 
           <Datepicker
-          // onChangetext={val=>{
-          //   handlechange(val, 'dob');
-          //   handleError(null, 'dob');
-          // }}
-          />
+      />
         </View>
 
         <View style={style.container}>
@@ -379,7 +328,6 @@ const Registerscr = ({navigation}) => {
           />
           <Inputcomponent
             label={'Mobile number'}
-            // textinputplaceholder={'john.doe@gmail.com'}
             mobilenumber
             keyboardtype={'numeric'}
             onChangetext={text => {
@@ -389,25 +337,10 @@ const Registerscr = ({navigation}) => {
             error={errors.mobile}
           />
 
-          
-          {/* <Pressable
-            // onPress={() => setModalVisible(true)}
-            // onPress={() => Validate()}
-            onPress={navigation.navigate('Createpasswordscr', { input: input })}
-
-            style={style.btncontainer}>
-            <Text style={[style.btn, {color: '#fff'}]}>Save</Text>
-          </Pressable> */}
         </View>
         <Pressable
-        // onPress={() => {
-        //   Validate(); 
-        //   if (Object.keys(errors).length === 0) {
-        //     navigation.navigate('Createpasswordscr', { input: input, ...prop });
-        //   }
-        // }}
-        onPress={handleSave}
-         style={style.btncontainer}>
+          onPress={() => validate()}
+          style={style.btncontainer}>
           <Text style={[style.btn, {color: '#fff'}]}>Save</Text>
         </Pressable>
       </View>

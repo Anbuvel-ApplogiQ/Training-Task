@@ -11,8 +11,9 @@ import Circle from '../image/circle.svg';
 import Checkcircle from '../image/check-circle.svg';
 
 const Createpasswordscr = ({ route }) => {
-  console.log(route.params,"hhhhhhhhh");
-  const {input}=route.params;
+  const {input}=route?.params;
+  // console.log(input,"hhhhhhhhh");
+
   const [type, setType] = useState('password');
 
   // =========================
@@ -23,7 +24,9 @@ const Createpasswordscr = ({ route }) => {
   const [lengthValidated, setLengthValidated] = useState(false);
   const[password,setpassword]=useState("");
   const[passworderror,setpassworderror]=useState(null);
+  const [confirmationpassword, setConfirmationPassword] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const[disabledbtn,setdisablebtn]=useState(false);
 
   const lower = new RegExp('(?=.*[a-z])');
   const upper = new RegExp('(?=.*[A-Z])');
@@ -40,19 +43,28 @@ const Createpasswordscr = ({ route }) => {
     setpassword(value);
     
   };
-  const Checkpassword=(cofirmationpassword)=>{
+  const Checkpassword=(confirmationpassword)=>{
     
-    if(password===cofirmationpassword)
+    if(password===confirmationpassword)
     {
       // console.log("match");
+      setdisablebtn(true);
       setpassworderror(null);
     }
     else{
       // console.log("error");
       setpassworderror("Password do not Match");
     }
+    setConfirmationPassword(confirmationpassword);
   }
-  
+  const handlecreatepassword =()=>{
+    if(password && confirmationpassword && password === confirmationpassword)
+    {  
+     
+      setModalVisible(true);
+     
+    }
+  };
 
   // =========================validation fun ========
   const ValidationItem = ({validated, label}) => (
@@ -115,7 +127,7 @@ const Createpasswordscr = ({ route }) => {
             </View>
           </Modal>
         <View style={styles.textcontainer}>
-          {/* <View style={styles.textstyle}> */}
+          {/* <View style={styles.textstyle}> */}  
           <Text style={[styles.text1, {marginBottom: 8}]}>
             Great! Now let’s create a password
           </Text>
@@ -212,9 +224,10 @@ const Createpasswordscr = ({ route }) => {
             </TouchableOpacity>
           </View>
           <TouchableOpacity
-          onPress={() => setModalVisible(true)
-          }disabled={passworderror ? true:false}
-          style={styles.btncontainer}>
+          onPress={() => handlecreatepassword()}
+          disabled={disabledbtn===true?false:true}
+          // disabled={false}
+          style={ disabledbtn==true?styles.btncontainer:styles.btncontainer2}>
           <Text style={[styles.btn, {color: '#fff'}]}>Create Password</Text>
         </TouchableOpacity>
           {/* <View style={styles.btncontainer}>
@@ -251,6 +264,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop:wp("4.5%")
+  },
+  btncontainer2:{
+    backgroundColor: '#e892f7',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop:wp("4.5%")
+
   },
   btn: {
     fontFamily: 'barlow',
