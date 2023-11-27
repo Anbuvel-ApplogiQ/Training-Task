@@ -232,7 +232,7 @@ const style = StyleSheet.create({
     fontWeight: '700',
     fontStyle: 'normal',
     fontFamily: 'Barlow-Regular',
-    color: 'rgba(71, 59, 74, 1)',
+    color: '#473B4A',
   },
   inputtext: {
     width: wp('100%'),

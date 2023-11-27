@@ -12,6 +12,8 @@ import Checkcircle from '../image/check-circle.svg';
 
 const Createpasswordscr = ({ route }) => {
   const {input}=route?.params;
+  // const{photo}=route.params;
+  // console.log(photo,"hhhhhhhhhhhhhhh");
   // console.log(input,"hhhhhhhhh");
 
   const [type, setType] = useState('password');
@@ -94,7 +96,7 @@ const Createpasswordscr = ({ route }) => {
          
       <Modal
             animationType="slide"
-            transparent={true}
+            transparent={false}
             visible={modalVisible}
             onRequestClose={() => {
               Alert.alert('Modal has been closed.');
@@ -144,7 +146,7 @@ const Createpasswordscr = ({ route }) => {
           <View>
             <Inputcomponent
               label={'Password (Optional)'}
-              textinputplaceholder={'enter password'}
+              textinputplaceholder={'Enter Password'}
               secureTextEntry={type == 'password'}
               onChangetext={value => handleChange(value)}
               // error={password?"Given Format is Required":null}
@@ -204,7 +206,7 @@ const Createpasswordscr = ({ route }) => {
           <View style={{marginTop: wp('8.8%')}}>
             <Inputcomponent
               label={'Confirm Password'}
-              textinputplaceholder={'enter password'}
+              textinputplaceholder={'Enter Password'}
               secureTextEntry={type == 'password'}
               onChangetext={text => Checkpassword(text)}
               error={passworderror}
@@ -293,6 +295,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
     color: '#473B4A',
+    fontFamily:"Barlow-SemiBold"
     // backgroundColor:"blue"
     // fontFamily:"Barlow-Regular",
     // fontStyle:'normal'
@@ -301,6 +304,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '400',
     color: '#473B4A',
+    fontFamily:"Barlow-Regular",
+    paddingBottom:20
     // backgroundColor:'green'
   },
   //======================================== model

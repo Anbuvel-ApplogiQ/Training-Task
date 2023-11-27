@@ -125,7 +125,7 @@ const Registerscr = ({navigation}) => {
     seterrors(error);
 
     if (Object.values(error).length === 0) {
-      navigation.navigate('Createpasswordscr', {input: input});
+      navigation.navigate('Createpasswordscr', {input: input,photo:imageSource});
     } else {
       console.log('fail', error);
     }
@@ -195,7 +195,7 @@ const Registerscr = ({navigation}) => {
                 style={{height: 100, width: 100, borderRadius: 50}}
               />
             </Pressable>
-            <View style={{alignItems: 'flex-start', position: 'absolute'}}>
+            <View style={{alignItems:"flex-start", position: 'absolute'}}>
               <Pressable
                 style={style.svgbackground}
                 onPress={() => editImage()}>
@@ -449,7 +449,6 @@ const style = StyleSheet.create({
   butshticon1: {
     backgroundColor: 'rgba(126, 0, 149, 1)',
     padding: 15,
-
     borderRadius: 10,
   },
   dateconatiner: {

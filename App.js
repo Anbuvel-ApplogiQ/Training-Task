@@ -8,10 +8,10 @@ import Basic from './app/components/normal task/formik';
 
 const App = () => {
   return (
-    // <NavigationContainer>
-    //   <Stacknavigation />
-    // </NavigationContainer>
-   <Basic/>
+    <NavigationContainer>
+      <Stacknavigation />
+    </NavigationContainer>
+  //  <Basic/>
 
   //  <ValidationExample/>
   )
