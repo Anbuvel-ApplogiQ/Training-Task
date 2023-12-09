@@ -9,6 +9,9 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import Back from '../../image/angle-left.svg';
+import BacicinfoScr from '../../screen/Bacicinfo';
+import AttributesScr from '../../screen/normal task/attributes';
+import AttributedetailScr from '../../screen/Attributesdetails';
 
 const Stacknavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -50,6 +53,10 @@ const Stacknavigation = () => {
         headerBackVisible:false
         
       }} />
+      <Stack.Screen name="Basicscr" component={BacicinfoScr} options={{headerShown:false}}/>
+      <Stack.Screen name='Attributescr'component={AttributesScr} options={{headerShown:false}}/>
+      <Stack.Screen name='AttributedetailScr' component={AttributedetailScr} options={{headerShown:false}}/>
+      
     </Stack.Navigator>
   );
 };

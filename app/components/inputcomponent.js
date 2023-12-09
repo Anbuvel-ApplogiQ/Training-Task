@@ -64,6 +64,7 @@ const Inputcomponent = ({
               onFocus();
               setIsFocused(true);
             }}
+            
             onBlur={() => setIsFocused(false)}
             
             
@@ -100,8 +101,9 @@ const Inputcomponent = ({
           //     // setFormattedValue(text);
           //     // setCountryCode(phoneInput.current?.getCountryCode() || '');
           //   }}
+          
           countryPickerProps={{withAlphaFilter: true}}
-          containerStyle={{width: wp('87.4%'), borderRadius: 16,borderWidth:1,borderColor:error?"red":"white"}}
+          containerStyle={{width: wp('87.4%'),elevation:0, borderRadius: 16,borderWidth:1,borderColor:error?"red":"#rgba(238, 237, 238, 1)"}}
           textContainerStyle={{
             borderRadius: 16,
             backgroundColor: 'white',

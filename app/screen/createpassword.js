@@ -10,7 +10,7 @@ import Eyeopen from '../image/eye.svg';
 import Circle from '../image/circle.svg';
 import Checkcircle from '../image/check-circle.svg';
 
-const Createpasswordscr = ({ route }) => {
+const Createpasswordscr = ({ route ,navigation}) => {
   const {input}=route?.params;
   // const{photo}=route.params;
   // console.log(photo,"hhhhhhhhhhhhhhh");
@@ -124,6 +124,11 @@ const Createpasswordscr = ({ route }) => {
                   style={styles.closebtn}
                   onPress={() => setModalVisible(!modalVisible)}>
                   <Text style={styles.closemodeltext}>Hide Modal</Text>
+                </Pressable>
+                <Pressable
+                  style={styles.closebtn}
+                  onPress={() =>navigation.navigate("Basicscr")}>
+                  <Text style={styles.closemodeltext}>GO TO BASIC PAGE</Text>
                 </Pressable>
               </View>
             </View>
@@ -332,6 +337,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     borderColor: 'white',
+    marginBottom:5
   },
   inputmodelcontainer: {
     borderWidth: 2,
